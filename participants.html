@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Participants | eSports Tournament</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">eSports Cup</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="participants.html">Participants</a>
+    <a href="register.html">Register</a>
+  </nav>
+</header>
+
+<section class="section participants">
+  <h2>Participants</h2>
+  <div class="card-container" id="participants-container">
+    <!-- Data loads dynamically -->
+  </div>
+</section>
+
+<script>
+async function loadParticipants() {
+  const res = await fetch("/api/participants");
+  const data = await res.json();
+  const container = document.getElementById("participants-container");
+  container.innerHTML = "";
+  data.forEach(p=>{
+    container.innerHTML += `
+      <div class="card">
+        <h3>${p.name}</h3>
+        <p><strong>Game:</strong> ${p.game}</p>
+        <p><strong>Contact:</strong> ${p.contact}</p>
+        <p><strong>Points:</strong> ${p.points || 0}</p>
+      </div>`;
+  });
+}
+
+loadParticipants();
+</script>
+</body>
+</html>

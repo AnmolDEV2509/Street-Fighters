@@ -1,0 +1,24 @@
+{
+"participants": [
+{
+"id": "p1",
+"name": "Team Phoenix",
+"contact": "[alex@example.com](mailto:alex@example.com)",
+"game": "Free Fire",
+"points": 250,
+"registeredAt": "2025-09-01T10:00:00.000Z"
+},
+{
+"id": "p2",
+"name": "Shadow Hunters",
+"contact": "[jordan@example.com](mailto:jordan@example.com)",
+"game": "CSGO",
+"points": 200,
+"registeredAt": "2025-09-05T12:00:00.000Z"
+}
+],
+"leaderboard": [
+{ "id": "p1", "name": "Team Phoenix", "points": 250 },
+{ "id": "p2", "name": "Shadow Hunters", "points": 200 }
+]
+}

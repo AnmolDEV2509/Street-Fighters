@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Profile | eSports Tournament</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">eSports Cup</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <a href="participants.html">Participants</a>
+    <a href="register.html">Register</a>
+  </nav>
+</header>
+
+<section class="section profile">
+  <h2>Your Profile</h2>
+  <div id="profile-container">
+    <!-- Filled dynamically -->
+  </div>
+</section>
+
+<script>
+async function loadProfile() {
+  const id = localStorage.getItem("participantId");
+  if(!id) {
+    document.getElementById("profile-container").innerHTML = "<p>No profile found. Please register first.</p>";
+    return;
+  }
+  const res = await fetch("/api/participants");
+  const participants = await res.json();
+  const p = participants.find(x => x.id === id);
+  if(!p) {
+    document.getElementById("profile-container").innerHTML = "<p>Profile not found.</p>";
+    return;
+  }
+  document.getElementById("profile-container").innerHTML = `
+    <p><strong>Team:</strong> ${p.name}</p>
+    <p><strong>Game:</strong> ${p.game}</p>
+    <p><strong>Contact:</strong> ${p.contact}</p>
+    <p><strong>Points:</strong> ${p.points || 0}</p>
+  `;
+}
+
+loadProfile();
+</script>
+</body>
+</html>

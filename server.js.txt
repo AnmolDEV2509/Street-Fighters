@@ -1,0 +1,23 @@
+document.getElementById("register-form")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const payload = {
+    name: formData.get("name"),
+    contact: formData.get("contact"),
+    game: formData.get("game")
+  };
+
+  const res = await fetch("/api/participants", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  const result = await res.json();
+  document.getElementById("register-msg").innerText = result.message || "Registered successfully!";
+  
+  if(result.participant?.id){
+    localStorage.setItem("participantId", result.participant.id);
+    window.location.href = "profile.html";
+  }
+});
